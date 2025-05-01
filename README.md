@@ -1,66 +1,119 @@
-# Advanced Todo App
+# What To-Do
 
-A feature-rich todo application built with React, Redux Toolkit, and Tailwind CSS.
+A modern, feature-rich todo application built with React, Redux Toolkit, and Tailwind CSS. The app features a beautiful Vercel-inspired design with glass morphism effects and gradient accents.
+
+![What To-Do App](screenshot.png)
 
 ## Features
 
-- Create, read, update, and delete todos
-- Mark todos as complete/incomplete
-- Set priority levels (low, medium, high)
-- Add due dates
-- Tag system for better organization
-- Advanced filtering and search capabilities
-- Responsive design
-- Local storage persistence
+- ✨ Modern, responsive UI with glass morphism effects
+- 📱 Full mobile support
+- 🎯 Task management with priorities (Low, Medium, High)
+- 🏷️ Custom tags for better organization
+- 📅 Due dates for tasks
+- 🔍 Advanced filtering and sorting options
+- 🎨 Beautiful gradients and animations
+- 💾 Local storage persistence
+- 🌓 Dark mode optimized
 
-## Technologies Used
+## Tech Stack
 
-- React
-- Redux Toolkit for state management
-- TypeScript for type safety
-- Tailwind CSS for styling
-- Heroicons for icons
-- date-fns for date formatting
+- **React** - UI Framework
+- **Redux Toolkit** - State Management
+- **TypeScript** - Type Safety
+- **Tailwind CSS** - Styling
+- **Vite** - Build Tool
+- **Hero Icons** - Icons
+- **date-fns** - Date Formatting
 
 ## Getting Started
 
-1. Clone the repository
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/react-todo-advanced.git
+cd react-todo-advanced
+```
+
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
+
+```bash
+npm install
+# or
+yarn
+```
+
 3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
 4. Open [http://localhost:5173](http://localhost:5173) in your browser
 
-## Usage
+## Project Structure
 
-### Adding a Todo
+```
+src/
+├── components/          # React components
+│   ├── AddTodo.tsx     # Add todo form
+│   ├── Todo.tsx        # Todo item component
+│   └── TodoList.tsx    # List of todos
+├── store/              # Redux store
+│   ├── index.ts        # Store configuration
+│   └── todoSlice.ts    # Todo reducer and actions
+├── hooks/              # Custom hooks
+│   ├── useTodos.ts     # Todo management
+│   ├── useFilters.ts   # Filtering logic
+│   └── useTodoForm.ts  # Form handling
+├── App.tsx            # Main app component
+└── index.css         # Global styles
+```
 
-- Click the "Add New Todo" button
-- Fill in the todo details:
-  - Title (required)
-  - Description (optional)
-  - Priority level
-  - Due date
-  - Tags (press Enter after typing to add a tag)
+## Features in Detail
 
-### Managing Todos
+### Task Management
 
-- Click the checkbox to mark a todo as complete
-- Click the edit icon to modify a todo
-- Click the delete icon to remove a todo
+- Create, edit, and delete tasks
+- Mark tasks as complete/incomplete
+- Set priority levels (Low, Medium, High)
+- Add custom tags
+- Set due dates
 
-### Filtering and Searching
+### Filtering and Sorting
 
-- Use the search bar to find specific todos
-- Click the "Filters" button to access advanced filtering options:
-  - Filter by status (all, active, completed)
-  - Filter by priority
-  - Filter by tags
+- Filter by status (All, Active, Completed)
+- Filter by priority
+- Filter by tags
+- Sort by creation date, priority, or due date
+
+### UI/UX Features
+
+- Responsive design that works on all devices
+- Glass morphism effects for modern look
+- Smooth animations and transitions
+- Gradient accents for visual hierarchy
+- Intuitive task management interface
 
 ## Contributing
 
-Feel free to submit issues and pull requests.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Design inspired by Vercel's modern aesthetic
+- Built with React and modern web technologies
+- Icons provided by Heroicons
