@@ -20,16 +20,21 @@ export const AddTodo = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      createTodo(formState);
+      createTodo({ ...formState, completed: false });
       resetForm();
       setIsOpen(false);
     }
   };
 
+  const handleClose = () => {
+    resetForm();
+    setIsOpen(false);
+  };
+
   if (!isOpen) {
     return (
       <button
-        className="btn btn-primary w-full flex items-center justify-center gap-2"
+        className="w-full px-4 py-2 rounded-lg font-medium transition-all duration-200 border border-white bg-white text-black hover:bg-gray-100 flex items-center justify-center gap-2"
         onClick={() => setIsOpen(true)}
       >
         <PlusIcon className="w-5 h-5" />
@@ -41,104 +46,74 @@ export const AddTodo = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-4 rounded-lg shadow-md space-y-4"
+      className="bg-gray-900 border border-gray-800 rounded-lg shadow-lg p-6 space-y-4 relative"
     >
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Title
-        </label>
-        <input
-          type="text"
-          className="input"
-          value={formState.title}
-          onChange={(e) => updateField("title", e.target.value)}
-          placeholder="Enter todo title"
-          required
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Description
-        </label>
-        <textarea
-          className="input"
-          value={formState.description}
-          onChange={(e) => updateField("description", e.target.value)}
-          placeholder="Enter todo description"
-          rows={3}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Priority
-          </label>
-          <select
-            className="input"
-            value={formState.priority}
-            onChange={(e) => updateField("priority", e.target.value)}
+      <button
+        type="button"
+        onClick={handleClose}
+        className="absolute top-4 right-4 p-2 hover:bg-white/5 rounded-lg transition-colors"
+      >
+        <XMarkIcon className="w-5 h-5 text-gray-400" />
+      </button>
+      <input
+        type="text"
+        className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200"
+        value={formState.title}
+        onChange={(e) => updateField("title", e.target.value)}
+        placeholder="Enter todo title"
+      />
+      <textarea
+        className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200"
+        value={formState.description}
+        onChange={(e) => updateField("description", e.target.value)}
+        placeholder="Enter todo description"
+        rows={3}
+      />
+      <select
+        className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200 [&>option]:bg-gray-900 [&>option]:text-white"
+        value={formState.priority}
+        onChange={(e) => updateField("priority", e.target.value)}
+      >
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <input
+        type="date"
+        className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200"
+        value={formState.dueDate || ""}
+        onChange={(e) => updateField("dueDate", e.target.value)}
+      />
+      <div className="flex flex-wrap gap-2">
+        {formState.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-3 py-1 rounded-full text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors duration-200 flex items-center gap-2"
           >
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Due Date
-          </label>
-          <input
-            type="date"
-            className="input"
-            value={formState.dueDate}
-            onChange={(e) => updateField("dueDate", e.target.value)}
-          />
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Tags
-        </label>
-        <div className="flex flex-wrap gap-2 mb-2">
-          {formState.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-sm flex items-center gap-1"
+            {tag}
+            <button
+              type="button"
+              onClick={() => removeTag(tag)}
+              className="hover:text-white"
             >
-              {tag}
-              <button
-                type="button"
-                onClick={() => removeTag(tag)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <XMarkIcon className="w-4 h-4" />
-              </button>
-            </span>
-          ))}
-        </div>
+              ×
+            </button>
+          </span>
+        ))}
+      </div>
+      <div className="flex gap-2">
         <input
           type="text"
-          className="input"
+          className="flex-1 px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200"
           value={newTag}
           onChange={(e) => setNewTag(e.target.value)}
           onKeyDown={handleAddTag}
-          placeholder="Type a tag and press Enter"
+          placeholder="Add tags (press Enter)"
         />
-      </div>
-
-      <div className="flex justify-end gap-2">
         <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={() => setIsOpen(false)}
+          type="submit"
+          className="px-4 py-2 rounded-lg font-medium transition-all duration-200 border border-white bg-white text-black hover:bg-gray-100"
         >
-          Cancel
-        </button>
-        <button type="submit" className="btn btn-primary">
           Add Todo
         </button>
       </div>

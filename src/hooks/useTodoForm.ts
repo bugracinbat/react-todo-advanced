@@ -1,36 +1,37 @@
 import { useState } from "react";
 import { Todo } from "../store/todoSlice";
 
-interface TodoFormState {
+export interface TodoFormState {
   title: string;
   description: string;
   priority: Todo["priority"];
-  dueDate: string;
+  dueDate: string | null;
   tags: string[];
-  completed: boolean;
 }
 
 const initialFormState: TodoFormState = {
   title: "",
   description: "",
   priority: "medium",
-  dueDate: "",
+  dueDate: null,
   tags: [],
-  completed: false,
 };
 
-export const useTodoForm = (initialState: Partial<TodoFormState> = {}) => {
+export const useTodoForm = (initialState?: Partial<TodoFormState>) => {
   const [formState, setFormState] = useState<TodoFormState>({
-    ...initialFormState,
-    ...initialState,
+    title: initialState?.title || "",
+    description: initialState?.description || "",
+    priority: initialState?.priority || "medium",
+    dueDate: initialState?.dueDate || null,
+    tags: initialState?.tags || [],
   });
   const [newTag, setNewTag] = useState("");
 
-  const updateField = <K extends keyof TodoFormState>(
-    field: K,
-    value: TodoFormState[K]
-  ) => {
-    setFormState((prev) => ({ ...prev, [field]: value }));
+  const updateField = (field: keyof TodoFormState, value: any) => {
+    setFormState((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
   const handleAddTag = (e: React.KeyboardEvent) => {
@@ -56,7 +57,7 @@ export const useTodoForm = (initialState: Partial<TodoFormState> = {}) => {
   };
 
   const validateForm = () => {
-    return formState.title.trim().length > 0;
+    return formState.title.trim() !== "";
   };
 
   return {

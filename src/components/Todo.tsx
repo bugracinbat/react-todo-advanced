@@ -40,48 +40,59 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
     setIsEditing(false);
   };
 
-  const priorityColors = {
-    low: "bg-green-100 text-green-800",
-    medium: "bg-yellow-100 text-yellow-800",
-    high: "bg-red-100 text-red-800",
+  const priorityStyles = {
+    low: "bg-green-500/20 text-green-400",
+    medium: "bg-yellow-500/20 text-yellow-400",
+    high: "bg-red-500/20 text-red-400",
   };
 
   if (isEditing) {
     return (
-      <div className="p-4 bg-white rounded-lg shadow-md">
+      <div className="bg-gray-900 border border-gray-800 rounded-lg shadow-lg p-4 sm:p-6 space-y-4">
         <input
           type="text"
-          className="input mb-2"
+          className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200"
           value={formState.title}
           onChange={(e) => updateField("title", e.target.value)}
+          placeholder="Enter todo title"
         />
         <textarea
-          className="input mb-2"
+          className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200"
           value={formState.description}
           onChange={(e) => updateField("description", e.target.value)}
+          placeholder="Enter todo description"
+          rows={3}
         />
-        <select
-          className="input mb-2"
-          value={formState.priority}
-          onChange={(e) =>
-            updateField("priority", e.target.value as TodoType["priority"])
-          }
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-        <input
-          type="date"
-          className="input mb-2"
-          value={formState.dueDate || ""}
-          onChange={(e) => updateField("dueDate", e.target.value)}
-        />
-        <div className="flex gap-2">
-          <button onClick={handleSave} className="btn btn-primary">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <select
+            className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200 [&>option]:bg-gray-900 [&>option]:text-white"
+            value={formState.priority}
+            onChange={(e) =>
+              updateField("priority", e.target.value as TodoType["priority"])
+            }
+          >
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <input
+            type="date"
+            className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-200"
+            value={formState.dueDate || ""}
+            onChange={(e) => updateField("dueDate", e.target.value)}
+          />
+        </div>
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={handleSave}
+            className="px-4 py-2 rounded-lg font-medium transition-all duration-200 border border-white bg-white text-black hover:bg-gray-100"
+          >
             Save
           </button>
-          <button onClick={handleCancel} className="btn btn-secondary">
+          <button
+            onClick={handleCancel}
+            className="px-4 py-2 rounded-lg font-medium transition-all duration-200 border border-gray-800 bg-transparent text-white hover:bg-gray-900"
+          >
             Cancel
           </button>
         </div>
@@ -91,22 +102,25 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
 
   return (
     <div
-      className={`p-4 bg-white rounded-lg shadow-md ${
-        todo.completed ? "opacity-75" : ""
+      className={`bg-gray-900 border border-gray-800 rounded-lg shadow-lg p-4 sm:p-6 ${
+        todo.completed ? "opacity-50" : ""
       }`}
     >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <button onClick={handleToggle}>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleToggle}
+            className="hover:opacity-80 transition-opacity"
+          >
             {todo.completed ? (
-              <CheckCircleIcon className="w-6 h-6 text-green-500" />
+              <CheckCircleIcon className="w-6 h-6 text-green-400" />
             ) : (
-              <XCircleIcon className="w-6 h-6 text-gray-400" />
+              <XCircleIcon className="w-6 h-6 text-gray-500" />
             )}
           </button>
           <h3
             className={`text-lg font-medium ${
-              todo.completed ? "line-through text-gray-500" : ""
+              todo.completed ? "line-through text-gray-500" : "text-white"
             }`}
           >
             {todo.title}
@@ -115,36 +129,36 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={handleEdit}
-            className="p-1 hover:bg-gray-100 rounded"
+            className="p-2 hover:bg-white/5 rounded-lg transition-colors"
           >
-            <PencilIcon className="w-5 h-5 text-gray-500" />
+            <PencilIcon className="w-5 h-5 text-gray-400" />
           </button>
           <button
             onClick={handleDelete}
-            className="p-1 hover:bg-gray-100 rounded"
+            className="p-2 hover:bg-white/5 rounded-lg transition-colors"
           >
-            <TrashIcon className="w-5 h-5 text-red-500" />
+            <TrashIcon className="w-5 h-5 text-red-400" />
           </button>
         </div>
       </div>
-      <p className="mt-2 text-gray-600">{todo.description}</p>
+      <p className="mt-2 text-gray-400">{todo.description}</p>
       <div className="mt-4 flex flex-wrap gap-2 items-center">
         <span
-          className={`px-2 py-1 rounded text-sm ${
-            priorityColors[todo.priority]
+          className={`px-3 py-1 rounded-full text-sm font-medium ${
+            priorityStyles[todo.priority]
           }`}
         >
           {todo.priority}
         </span>
         {todo.dueDate && (
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-400">
             Due: {format(new Date(todo.dueDate), "MMM d, yyyy")}
           </span>
         )}
         {todo.tags.map((tag) => (
           <span
             key={tag}
-            className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-sm"
+            className="px-3 py-1 rounded-full text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors duration-200"
           >
             {tag}
           </span>
