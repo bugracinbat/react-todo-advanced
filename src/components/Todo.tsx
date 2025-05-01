@@ -41,9 +41,10 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
   };
 
   const priorityStyles = {
-    low: "bg-green-500/20 text-green-400",
-    medium: "bg-yellow-500/20 text-yellow-400",
-    high: "bg-red-500/20 text-red-400",
+    low: "bg-green-500/20 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.3)]",
+    medium:
+      "bg-yellow-500/20 text-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.3)]",
+    high: "bg-red-500/20 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.3)]",
   };
 
   if (isEditing) {
@@ -102,15 +103,19 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
 
   return (
     <div
-      className={`bg-gray-900 border border-gray-800 rounded-lg shadow-lg p-4 sm:p-6 ${
+      className={`backdrop-blur-md bg-gray-900/30 border border-white/10 rounded-lg shadow-lg p-4 sm:p-6 relative overflow-hidden group hover:border-purple-500/50 transition-all duration-300 ${
         todo.completed ? "opacity-50" : ""
       }`}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 border-2 border-transparent rounded-lg">
+        <div className="absolute inset-0 border-2 border-purple-500/30 rounded-lg animate-scan" />
+      </div>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative">
         <div className="flex items-center gap-3">
           <button
             onClick={handleToggle}
-            className="hover:opacity-80 transition-opacity"
+            className="hover:opacity-80 transition-opacity hover:shadow-[0_0_15px_rgba(34,197,94,0.3)]"
           >
             {todo.completed ? (
               <CheckCircleIcon className="w-6 h-6 text-green-400" />
@@ -129,13 +134,13 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={handleEdit}
-            className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/5 rounded-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
           >
-            <PencilIcon className="w-5 h-5 text-gray-400" />
+            <PencilIcon className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors" />
           </button>
           <button
             onClick={handleDelete}
-            className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/5 rounded-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(239,68,68,0.3)]"
           >
             <TrashIcon className="w-5 h-5 text-red-400" />
           </button>
@@ -158,7 +163,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
         {todo.tags.map((tag) => (
           <span
             key={tag}
-            className="px-3 py-1 rounded-full text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+            className="px-3 py-1 rounded-full text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)]"
           >
             {tag}
           </span>

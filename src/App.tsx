@@ -8,6 +8,8 @@ function App() {
     <Provider store={store}>
       <div className="min-h-screen w-screen bg-gradient-to-b from-black via-gray-900 to-black text-white relative animate-dark-gradient">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.15] animate-grid" />
+        <div className="absolute inset-0 digital-rain opacity-[0.07]" />
         <main className="w-full min-h-screen relative">
           <div className="w-full max-w-5xl mx-auto px-4 py-8">
             <div className="text-center mb-8">
