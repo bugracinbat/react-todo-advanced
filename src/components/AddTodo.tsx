@@ -68,20 +68,20 @@ export const AddTodo = () => {
         </div>
         <input
           type="text"
-          className="w-full px-4 py-2 rounded-lg bg-gray-900/50 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-200 focus:shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+          className="w-full px-4 py-2 rounded-lg cyber-input text-white placeholder-gray-500 focus:outline-none transition-all duration-200"
           value={formState.title}
           onChange={(e) => updateField("title", e.target.value)}
           placeholder="Enter todo title"
         />
         <textarea
-          className="w-full px-4 py-2 rounded-lg bg-gray-900/50 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-200 focus:shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+          className="w-full px-4 py-2 rounded-lg cyber-input text-white placeholder-gray-500 focus:outline-none transition-all duration-200"
           value={formState.description}
           onChange={(e) => updateField("description", e.target.value)}
           placeholder="Enter todo description"
           rows={3}
         />
         <select
-          className="w-full px-4 py-2 rounded-lg bg-gray-900/50 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-200 focus:shadow-[0_0_15px_rgba(168,85,247,0.2)] [&>option]:bg-gray-900 [&>option]:text-white"
+          className="w-full px-4 py-2 rounded-lg cyber-input text-white placeholder-gray-500 focus:outline-none transition-all duration-200 [&>option]:bg-gray-900 [&>option]:text-white"
           value={formState.priority}
           onChange={(e) => updateField("priority", e.target.value)}
         >
@@ -91,7 +91,7 @@ export const AddTodo = () => {
         </select>
         <input
           type="date"
-          className="w-full px-4 py-2 rounded-lg bg-gray-900/50 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-200 focus:shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+          className="w-full px-4 py-2 rounded-lg cyber-input text-white placeholder-gray-500 focus:outline-none transition-all duration-200"
           value={formState.dueDate || ""}
           onChange={(e) => updateField("dueDate", e.target.value)}
         />
@@ -99,9 +99,9 @@ export const AddTodo = () => {
           {formState.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 rounded-full text-sm font-medium bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)] flex items-center gap-2"
+              className="px-3 py-1 rounded-full text-sm font-medium bg-gray-800/50 text-gray-300 data-tag hover:bg-gray-700/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)] flex items-center gap-2"
             >
-              {tag}
+              <span className="glitch-text">{tag}</span>
               <button
                 type="button"
                 onClick={() => removeTag(tag)}
@@ -115,7 +115,7 @@ export const AddTodo = () => {
         <div className="flex gap-2">
           <input
             type="text"
-            className="flex-1 px-4 py-2 rounded-lg bg-gray-900/50 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-200 focus:shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+            className="flex-1 px-4 py-2 rounded-lg cyber-input text-white placeholder-gray-500 focus:outline-none transition-all duration-200"
             value={newTag}
             onChange={(e) => setNewTag(e.target.value)}
             onKeyDown={handleAddTag}
